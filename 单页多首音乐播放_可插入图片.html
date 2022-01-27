@@ -1,0 +1,36 @@
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<div id="audioBox">
+    <div id="name" />
+    <script type="text/javascript">
+        window.onload = function () {
+            var musics = {
+                "music": [
+                { "url": "music_data/周杰伦 - 威廉古堡.m4a", "name": "周杰伦 - 威廉古堡.m4a", "gender": "male" },
+                { "url": "music_data/周杰伦 - 彩虹.m4a", "name": "周杰伦 - 彩虹.m4a", "gender": "male" },
+                { "url": "music_data/城市找猪-五条人-56002983.flac", "name": "城市找猪-五条人-56002983.flac", "gender": "male" },
+                { "url": "music_data/道山靓仔-五条人-10969827.mp3", "name": "道山靓仔-五条人-10969827.mp3", "gender": "male" },
+                { "url": "music_data/陈先生-五条人-56003006.flac", "name": "陈先生-五条人-56003006.flac", "gender": "male" },]
+            }
+
+            var myAudio = new Audio();
+            myAudio.preload = true;
+            myAudio.controls = true;
+            myAudio.loop = false;//禁止循环，否则无法触发ended事件
+
+            var r = Math.floor(Math.random() * musics.music.length);//随机音乐
+            myAudio.src = musics.music[r].url;
+            document.getElementById("name").innerHTML = musics.music[r].name + "<br>";//歌曲名字
+
+            myAudio.addEventListener('ended', playEndedHandler, false);
+            document.getElementById("audioBox").appendChild(myAudio);
+
+            function playEndedHandler() {
+                var r = Math.floor(Math.random() * musics.music.length);//随机音乐
+                myAudio.src = musics.music[r].url;
+                document.getElementById("name").innerHTML = musics.music[r].name + "<br>";//歌曲名字
+                
+                myAudio.play();
+            }
+        }
+    </script>
+</div>
